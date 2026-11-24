@@ -54,6 +54,10 @@ def main():
             print("entry failed validation", file=sys.stderr)
             return 0
         out_dir = _output_dir()
+        repo_dir = os.path.dirname(os.path.abspath(__file__))
+        if os.path.abspath(out_dir) == repo_dir:
+            print("output directory must not be the repository", file=sys.stderr)
+            return 0
         os.makedirs(out_dir, exist_ok=True)
         path = os.path.join(out_dir, "entry.txt")
         with open(path, "w", encoding="utf-8", newline="\n") as handle:
